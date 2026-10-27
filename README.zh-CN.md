@@ -1,6 +1,8 @@
 # World Brief · 世界简报
 
-本地优先的日报和多视角周评工具。支持中英文界面、目录、搜索、展开/折叠、字号调整、复制提示词、本地 AI 问答和可选 ntfy 推送。
+ai简报系统很多，但这个会让你更客观一点，每周周评包含各个立场无论左翼右翼还是什么国籍，顺便尽量标出他们的资金来源，才能更好地知道他们为谁在讲话。
+
+[![CI](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml) [![Website](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml)
 
 [English](README.md) · [配置说明](docs/configuration.md) · [范围与验收](SPEC.md) · [隐私](docs/privacy.md)
 
@@ -11,6 +13,19 @@
 公开页面只展示虚构示例。真实简报生成和直接 AI 问答在自己的电脑上运行。`npm run build:demo` 可在本机生成相同预览，输出到 `.world-brief/site/`。
 
 需要 Windows、macOS 或 Linux 和 Node.js 22 以上版本。离线流程没有第三方运行依赖，无需模型账号、额度遥测或外部模型路由。
+
+## 功能与实现
+
+| 范围 | 实现 |
+| --- | --- |
+| 简报 | 每日日报与多视角周评，展开立场、依据、论证和反方问题 |
+| 公开披露 | 可选的资金／所有权背景，保留引用，区分个人、机构及未知状态 |
+| 阅读器 | 中英文界面、搜索、目录、展开条目、原文链接与复制 AI 提示词 |
+| 本地流程 | Node.js CLI、JSON 验证、可选本机问答服务及明确启用的通知 |
+| 调度 | Windows、Linux、macOS 原生调度文件导出，日报默认每天 |
+| 验证 | 自动测试、隐私扫描及三种系统、Node 22/24 的持续集成 |
+
+本仓库公开可复用的工具代码；链接的网站展示虚构数据下的阅读器，不是托管的实时新闻或 AI 服务。
 
 ## 离线试用
 
@@ -72,6 +87,6 @@ npm run privacy
 
 周评按原文支持情况展开每人的立场、依据、论证和反方问题，并可附公开资金背景、引用及核查日期。机构资金与个人关系分开显示；“未找到/未核查”不表示没有资助，也不能把机构捐助者写成作者为某条评论收款的证据。
 
-首页介绍由作者填写：`content/introduction.json` 的 `en`、`zh` 初始为空，填写纯文本后重新构建即可显示。空介绍不显示，也不代写宣传语；使用说明单独维护在 `content/usage.json`。
+项目介绍和使用说明放在本 GitHub 仓库，网站保留阅读器演示与在线说明。`content/introduction.json` 留空；使用说明单独维护在 `content/usage.json`。
 
 MIT 许可。源码与虚构示例预览发布在 GitHub，未发布到软件包注册中心，也未提供托管模型服务。实际发布验收见[发布报告](docs/release-report.md)。

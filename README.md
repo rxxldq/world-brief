@@ -1,6 +1,8 @@
 # World Brief
 
-Local-first daily news briefs and weekly perspectives, with a searchable HTML reader, source attribution, English/Chinese UI, optional AI follow-up questions and optional ntfy notifications.
+There are many AI briefing systems, but this one helps you see things a little more objectively. Its weekly review brings together voices from across the political spectrum—left, right and beyond—regardless of nationality. Where possible, it also identifies their funding sources, helping you better understand whose interests they speak for.
+
+[![CI](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml) [![Website](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml)
 
 [中文说明](README.zh-CN.md) · [Configuration](docs/configuration.md) · [Validation and scope](SPEC.md) · [Privacy](docs/privacy.md) · [Provenance](docs/provenance.md)
 
@@ -11,6 +13,19 @@ Local-first daily news briefs and weekly perspectives, with a searchable HTML re
 The public preview contains fictional examples only. Research generation and direct AI questions run on your own computer. To build the same static preview locally, run `npm run build:demo`; output is `.world-brief/site/`.
 
 Requires **Node.js 22 or later** on Windows, macOS or Linux. No runtime packages, account, API key, external model router or quota telemetry are required for the offline workflow. Live research uses a command provider you explicitly configure.
+
+## What it does
+
+| Area | Implementation |
+| --- | --- |
+| Briefs | Daily news and weekly perspectives with positions, evidence, reasoning and counterpoints |
+| Public disclosures | Optional cited funding/ownership context, with explicit personal/organization scope and unknown states |
+| Reader | English/Chinese interface, search, contents, expandable stories, source links and copyable AI prompts |
+| Local workflow | Node.js CLI, validated JSON, an optional loopback question service and opt-in notifications |
+| Scheduling | Windows Task Scheduler, Linux cron and macOS launchd exports; daily cadence by default |
+| Verification | Automated tests, privacy checks and CI across three operating systems and Node 22/24 |
+
+The repository contains the reusable tool. The linked website demonstrates its reader with fictional data; it is not a hosted live-news or AI service.
 
 ## Try the offline demo
 
@@ -84,6 +99,6 @@ Structure validation **does not verify facts, source reachability, copyright per
 
 Weekly voices can include a source-grounded position, evidence, reasoning and counterpoint. Public funding disclosures are optional and distinguish a person from an employer or publication. Unknown/not checked does not mean no funding; organization funding is not evidence that a particular statement was paid for. See the usage guide and configuration contract for labels and verification limits.
 
-The homepage introduction is author-owned: `content/introduction.json` starts with empty `en`/`zh` strings. Add the author's text there and rebuild; plain text is escaped and empty introductions are omitted. Usage instructions are maintained separately in `content/usage.json`.
+The project introduction and setup instructions live in this GitHub repository. The website remains a reader demonstration and usage guide. `content/introduction.json` is left empty; usage instructions are maintained separately in `content/usage.json`.
 
 Licensed under MIT. Source and a synthetic reader preview are published on GitHub; no package-registry release or hosted model service is provided. See [release verification](docs/release-report.md) for the checked commit and deployment status.
