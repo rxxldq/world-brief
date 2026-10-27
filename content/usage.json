@@ -1,0 +1,78 @@
+{
+  "en": {
+    "title": "How to use World Brief",
+    "reader": "Read the examples",
+    "back": "Back to the preview",
+    "notice": "The public preview contains fictional examples, not current reporting. Live research, AI answers and notifications require your own local setup.",
+    "sections": [
+      {
+        "title": "Read a daily brief or weekly perspectives",
+        "text": "Choose English or Chinese examples on the home page, then open a daily or weekly issue from the archive. Search filters the current issue. Contents jumps to a story; expand/collapse and A−/A+ adjust reading. Every story links to its sources. Confidence labels describe the brief's assessment; they are not independent fact checks."
+      },
+      {
+        "title": "Read each commentator's reasoning",
+        "text": "Weekly voices can include a position, evidence, reasoning and counterpoint, as supported by the original commentary. Open the original source to check its context. Political labels are approximate; an employer or outlet is not identical to the author's personal position."
+      },
+      {
+        "title": "Understand funding background",
+        "text": "When public evidence is available, the funding panel identifies whether it concerns the person or an organization, cites the disclosure and shows when it was checked. Documented organization funding is not evidence that the author was paid for this particular comment. Not found means the bounded search found no reliable public disclosure; not checked means no verification was performed. Neither means no funding exists. Missing data is acceptable. Funding alone does not establish a statement's truth or motive."
+      },
+      {
+        "title": "Ask your own AI assistant",
+        "text": "In the public preview, Ask AI and its suggestion buttons copy the selected story and source links into a prompt. Paste it into your own assistant. The website does not connect to a model or use a subscription. On a locally served instance, direct answers are available only after you explicitly configure and enable a provider."
+      },
+      {
+        "title": "Start a local copy",
+        "text": "Install Node.js 22 or later, download or clone the source repository, then run these commands from its folder. All sample stories are fictional. Use daily.zh.json and weekly.zh.json with init --locale zh for Chinese. If your config already exists, edit it instead of running init again.",
+        "commands": ["npm ci --ignore-scripts", "node bin/world-brief.mjs init", "node bin/world-brief.mjs run --input examples/daily.en.json", "node bin/world-brief.mjs run --kind weekly --input examples/weekly.en.json", "node bin/world-brief.mjs serve"]
+      },
+      {
+        "title": "Generate real briefs and schedule them",
+        "text": "Set the timezone and topics in local config.json, then configure the command provider according to the repository's configuration guide. Run with --kind daily or --kind weekly without --input. The provider must support research; source syntax checks do not verify facts. Export schedules for windows, linux or macos and review/install the generated files. Daily defaults to every day at 07:30; weekly remains Sunday at 09:00. Scheduler clocks use your OS local timezone. The computer and provider must be available. Exporting a schedule does not install it.",
+        "commands": ["node bin/world-brief.mjs run --kind daily", "node bin/world-brief.mjs run --kind weekly", "node bin/world-brief.mjs schedule --platform windows"]
+      },
+      {
+        "title": "Keep private data local",
+        "text": "Keep config.json, credentials, real briefs and generated schedules out of the public repository. Notifications are disabled by default: push previews a payload, and only an explicitly configured push --send sends it. Use an authenticated destination for sensitive information. Funding checks use publicly disclosed information and stop when reliable sources cannot be found."
+      }
+    ]
+  },
+  "zh": {
+    "title": "World Brief 使用说明",
+    "reader": "查看示例",
+    "back": "返回预览首页",
+    "notice": "公开预览全部为虚构示例，不是实时新闻。真实检索、AI 回答和通知需要在自己的电脑上配置。",
+    "sections": [
+      {
+        "title": "打开日报或周评",
+        "text": "首页选择中文或英文示例，再从存档打开日报、周评。搜索框只筛选当前一期；目录可跳转到条目，展开/折叠控制阅读范围，A−/A+ 调整字号。新闻和评论均可点击原文核对。可信度是简报自身的评估，不代表经过独立事实核查。"
+      },
+      {
+        "title": "查看每位评论者的完整观点",
+        "text": "周评会在原文支持的范围内展开各人的核心立场、依据、论证和反方问题，避免只列一句口号。请结合原文日期和上下文阅读；政治光谱标签是概括，任职机构和发表平台也不能完全代表作者本人。"
+      },
+      {
+        "title": "如何理解资金与机构背景",
+        "text": "有可靠公开资料时，资金面板会区分个人关系与机构背景，附披露来源和核查日期。媒体、雇主或智库的资金来源，不等于作者为这一条评论收钱。“未找到”表示有限检索未找到可靠披露，“未核查”表示尚未查证，两者都不表示不存在资金。查不到可以保留未知；不能仅凭资金背景推断观点真伪或个人动机。"
+      },
+      {
+        "title": "把问题交给自己的 AI",
+        "text": "公开预览里的“问 AI”和快捷问题会复制包含当前新闻、来源链接的提示词，再粘贴到你自己的助手。网站不连接模型，也不使用你的订阅额度。只有本机服务配置并启用模型后，才能直接在阅读器内获得回答。"
+      },
+      {
+        "title": "在本机试用",
+        "text": "安装 Node.js 22 或以上版本，下载或克隆源码，在项目目录运行以下命令。示例内容都是虚构的。init 不覆盖已有配置；如果 config.json 已存在，直接修改即可。serve 运行后，打开终端显示的本机地址，按 Ctrl+C 停止。",
+        "commands": ["npm ci --ignore-scripts", "node bin/world-brief.mjs init --locale zh", "node bin/world-brief.mjs run --input examples/daily.zh.json", "node bin/world-brief.mjs run --kind weekly --input examples/weekly.zh.json", "node bin/world-brief.mjs serve"]
+      },
+      {
+        "title": "生成真实简报并设置每天运行",
+        "text": "在本地 config.json 设置时区、关注话题，并按仓库配置说明接入能检索来源的命令模型。运行 daily 或 weekly 时不带 --input 即调用模型生成。日报默认每天 07:30，周评保留周日 09:00。导出 windows、linux 或 macos 调度文件后，检查并自行安装；导出本身不注册任务。调度时钟跟随操作系统本地时区，建议与配置时区一致。机器和模型必须可用；来源结构检查不等于事实核实。",
+        "commands": ["node bin/world-brief.mjs run --kind daily", "node bin/world-brief.mjs run --kind weekly", "node bin/world-brief.mjs schedule --platform windows"]
+      },
+      {
+        "title": "保管本地资料与可选通知",
+        "text": "config.json、凭据、真实简报和生成的调度文件应留在本机，不提交到公开仓库。通知默认关闭；push 只预览，配置完成并明确使用 push --send 才发送。私人内容请使用有认证的通知服务。资金背景只查公开披露，缺乏可靠资料就停止并标明未知。"
+      }
+    ]
+  }
+}

@@ -9,6 +9,7 @@ This records the bounded build requirements, not a replacement project plan. The
 - Cross-platform Node CLI: initialize, generate/import, validate, render/archive, serve/ask, preview/send push, export scheduler files.
 - Configurable paths, executable/arguments, topics, timezone, language and optional notification destination.
 - English and Simplified Chinese UI, prompts, archive and notification labels; synthetic examples in both languages.
+- Daily schedule defaults to every day; weekly voices support richer argument detail and bounded, attributed funding checks. The author's introduction remains empty and separate from maintained usage instructions.
 - Windows Task Scheduler, Linux cron and macOS launchd exports; no automatic installation.
 - Automated validation, integration and offline smoke tests; a CI matrix; depersonalization report and provenance.
 

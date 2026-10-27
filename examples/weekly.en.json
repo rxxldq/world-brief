@@ -1,17 +1,114 @@
 {
-  "kind": "weekly", "locale": "en", "date": "2025-01-19", "window": "2025-01-12 ~ 2025-01-19",
+  "kind": "weekly",
+  "locale": "en",
+  "date": "2025-01-19",
+  "window": "2025-01-12 ~ 2025-01-19",
   "title": "Weekly Perspectives · fictional demonstration",
-  "bluf": ["DEMO ONLY: fictional viewpoints demonstrate the weekly format."],
-  "sections": [{"title": "Fictional research cooperation", "items": [{
-    "headline": "Illustrative perspectives on a fictional programme", "summary": "No actual person, institution or news event is represented.",
-    "sources": [{"publisher": "Example", "url": "https://example.org/"}],
-    "voices": [
-      {"name": "Fictional commentator A", "camp": "left", "role": "Demonstration", "paraphrase": "Prioritises equitable access.", "url": "https://example.org/left", "date": "2025-01-18"},
-      {"name": "Fictional commentator B", "camp": "center", "role": "Demonstration", "paraphrase": "Prioritises practical coordination.", "url": "https://example.org/center", "date": "2025-01-18"},
-      {"name": "Fictional commentator C", "camp": "right", "role": "Demonstration", "paraphrase": "Prioritises budget accountability.", "url": "https://example.org/right", "date": "2025-01-18"},
-      {"name": "Fictional public broadcaster", "camp": "state-media", "paraphrase": "Prioritises the official programme goals.", "url": "https://example.org/official", "date": "2025-01-18"}
-    ],
-    "synthesis": "These are invented positions. Real coverage must attribute positions accurately and disclose missing perspectives."
-  }]}],
-  "method_note": "Synthetic fixture only. Placeholder links are not evidence."
+  "bluf": [
+    "DEMO ONLY: fictional viewpoints demonstrate the weekly format."
+  ],
+  "sections": [
+    {
+      "title": "Fictional research cooperation",
+      "items": [
+        {
+          "headline": "Illustrative perspectives on a fictional programme",
+          "summary": "No actual person, institution or news event is represented.",
+          "sources": [
+            {
+              "publisher": "Example",
+              "url": "https://example.org/"
+            }
+          ],
+          "voices": [
+            {
+              "name": "Fictional commentator A",
+              "camp": "left",
+              "role": "Demonstration",
+              "paraphrase": "Prioritises equitable access.",
+              "url": "https://example.org/left",
+              "date": "2025-01-18",
+              "bio": "Invented access-policy commentator; all arguments and supporting material below are fictional.",
+              "position": "Supports the imagined research programme only if smaller laboratories can participate without large up-front costs and can use its findings on equal terms.",
+              "evidence": "In this fictional scenario, the proposed application rules require matching resources, while the draft access agreement leaves publication rights unsettled. These are invented documents, not source evidence.",
+              "reasoning": "A formally open invitation could still favour institutions with larger budgets. The commentator therefore connects fair access to the practical rules for entry, data sharing and publication, rather than to the programme’s cooperative language alone.",
+              "counterpoint": "Removing every contribution requirement could weaken delivery incentives. A targeted waiver and transparent selection process might address exclusion while preserving accountability; the imagined material cannot establish which approach would work.",
+              "funding": {
+                "status": "not_checked",
+                "scope": "person",
+                "summary": "Unknown. This fictional example includes no actual funding check or claim about any person or organization.",
+                "sources": [],
+                "checked_at": "2025-01-19",
+                "limitations": "Synthetic status and record date only. No donors, financial ties or absence of funding are established. Organization scope never establishes personal ties."
+              }
+            },
+            {
+              "name": "Fictional commentator B",
+              "camp": "center",
+              "role": "Demonstration",
+              "paraphrase": "Prioritises practical coordination.",
+              "url": "https://example.org/center",
+              "date": "2025-01-18",
+              "bio": "Invented research-administration commentator; no real institution is represented.",
+              "position": "Favours a small, reversible pilot with common reporting rules before committing the fictional partners to a permanent shared research structure.",
+              "evidence": "The imagined programme plan describes incompatible data formats and an unresolved process for approving joint projects. No actual plan or operational results have been reviewed.",
+              "reasoning": "The commentator sees coordination costs as an obstacle that political agreement alone cannot remove. A pilot could test whether shared definitions, designated decision makers and a clear timetable improve delivery before larger commitments become difficult to unwind.",
+              "counterpoint": "A pilot may delay useful work and may miss problems that emerge only at scale. Success would therefore need a published evaluation method and a credible decision point, not simply a favourable announcement from the participating institutions.",
+              "funding": {
+                "status": "not_found",
+                "scope": "person",
+                "summary": "Unknown. This invented reporting scenario models a bounded check with no information found; no real-world funding search was conducted.",
+                "sources": [],
+                "checked_at": "2025-01-19",
+                "limitations": "Synthetic status and record date only. No donors, financial ties or absence of funding are established. Organization scope never establishes personal ties."
+              }
+            },
+            {
+              "name": "Fictional commentator C",
+              "camp": "right",
+              "role": "Demonstration",
+              "paraphrase": "Prioritises budget accountability.",
+              "url": "https://example.org/right",
+              "date": "2025-01-18",
+              "bio": "Invented budget-policy commentator; this is a demonstration of argument structure.",
+              "position": "Would withhold approval for the imagined programme until its organizers publish a cost ceiling, milestones and a practical route for ending unsuccessful work.",
+              "evidence": "In the fictional briefing, anticipated benefits are described broadly but recurring operating costs and the division of liability remain unspecified. This is invented scenario material.",
+              "reasoning": "The commentator argues that uncertain benefits make staged commitments more valuable, because later spending can respond to observed results. Accountability depends on disclosing assumptions and responsibility for overruns rather than merely promising future scientific gains.",
+              "counterpoint": "Some research benefits emerge slowly and cannot be captured by short milestone cycles. Excessively rigid spending conditions could discourage valuable experiments; the proposed safeguards would need to accommodate uncertainty without removing scrutiny.",
+              "funding": {
+                "status": "not_checked",
+                "scope": "organization",
+                "summary": "Unknown. This fictional example includes no actual funding check or claim about any person or organization.",
+                "sources": [],
+                "checked_at": "2025-01-19",
+                "limitations": "Synthetic status and record date only. No donors, financial ties or absence of funding are established. Organization scope never establishes personal ties."
+              }
+            },
+            {
+              "name": "Fictional public broadcaster",
+              "camp": "state-media",
+              "paraphrase": "Prioritises the official programme goals.",
+              "url": "https://example.org/official",
+              "date": "2025-01-18",
+              "bio": "Invented public-broadcasting analyst explaining an imagined official position.",
+              "position": "Presents the fictional programme as a way to maintain practical cooperation even while participating governments disagree on other issues.",
+              "evidence": "An imagined joint statement emphasizes shared technical standards and regular working-level meetings. It contains no independent evidence of implementation, and no real government statement is being cited.",
+              "reasoning": "The analyst connects routine technical contact to continuity: agreed procedures might allow useful projects to continue despite wider diplomatic friction. This explains the official framing but does not verify that the partners will comply or that cooperation will improve political relations.",
+              "counterpoint": "Official announcements can omit enforcement disputes and excluded participants. Independent reporting, implementation records and the views of affected researchers would be needed to assess whether the stated goals translate into durable benefits.",
+              "funding": {
+                "status": "not_found",
+                "scope": "organization",
+                "summary": "Unknown. This invented reporting scenario models a bounded check with no information found; no real-world funding search was conducted.",
+                "sources": [],
+                "checked_at": "2025-01-19",
+                "limitations": "Synthetic status and record date only. No donors, financial ties or absence of funding are established. Organization scope never establishes personal ties."
+              }
+            }
+          ],
+          "synthesis": "These are invented positions. Real coverage must attribute positions accurately and disclose missing perspectives."
+        }
+      ]
+    }
+  ],
+  "method_note": "Synthetic fixture only. All people, arguments and scenario documents are fictional; placeholder links are not evidence. Funding statuses illustrate unknown information and do not report actual checks or donor facts."
 }

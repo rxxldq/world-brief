@@ -15,7 +15,7 @@ Copy `config.example.json` through `init`; do not commit your local config. Runt
 | `ntfy.enabled`, `server`, `topic` | Opt-in HTTPS notification destination; choose your own topic |
 | `ntfy.tokenEnv` | Environment variable holding the token; never put the token in JSON |
 | `schedule.dailyAt`, `weeklyAt` | `HH:MM`, OS local clock |
-| `schedule.dailyEveryDays` | Calendar days since the last successful daily brief |
+| `schedule.dailyEveryDays` | Calendar days since the last successful daily brief; default 1 (daily). Migrate an older private config from 3 to 1 explicitly |
 
 `serve` binds only to `127.0.0.1`; port `0` requests an ephemeral port. A used port fails, rather than assuming another process is a trusted World Brief server. Use one server per output root so that the in-process concurrency guard and daily budget have one owner. Daily budgets are saved in `.ask-counts.json`; attempted provider calls count even when they fail. Corrupt counters fail closed. The static server never exposes this file.
 
@@ -59,6 +59,16 @@ Required top-level fields: `kind` (`daily`/`weekly`), real ISO `date`, non-empty
 Optional item fields: `summary`, `why_it_matters`, `unverified`, `synthesis`; `sources` with `title`, `publisher`, `published`; `voices` with `name`, `camp`, `url` and at least `quote` or `paraphrase`, plus optional `role`, `outlet`, `bio`, `date`; `embeds` with `url`, optional `note`/`type`; `images` with `source_url`, `credit`, optional `caption`, and either `file` or `remote_url`. Camp values are `left`, `center-left`, `center`, `center-right`, `right`, `state-media`, `other`.
 
 Optional top-level fields: `locale`, `window`, `method_note`, `watchlist` (`item` required, `date` optional). Use `method_note` to disclose research failures, missing perspectives and stale evidence. See the four synthetic examples for full daily/weekly objects in both languages.
+
+### Detailed voices and funding background
+
+Each voice may additionally contain `position`, `evidence`, `reasoning` and `counterpoint` strings. Attribute the author's claims and distinguish editorial counterpoints from the author's own words. Generation targets around 150–250 Chinese characters or 90–160 English words per person when sources support that detail; insufficient material should shorten the entry and disclose the limit.
+
+An optional `funding` object contains `status` (`documented`, `not_found`, `not_checked`), `scope` (`person`, `organization`), `summary` (string), `sources` (objects with HTTP(S) `url`, optional `title`/`publisher`), `checked_at` (real ISO date) and optional `limitations` (string). `documented` requires a non-empty summary and at least one citation. The renderer labels status and scope explicitly, displays citations/date and keeps unknown states distinct from absence of funding.
+
+Use primary disclosures: annual reports, donor lists, ownership statements, public filings or personal disclosures. Research is bounded to one or two source checks per person and may reuse an already checked organization. Do not guess figures, ties or motives when disclosures cannot be found. An employer/outlet's financial background is organizational evidence, not proof of personal compensation for a specific statement. Copy/ask prompts preserve that attribution and context.
+
+The public examples remain fictional; their unknown funding fields demonstrate the format and are not real investigations. Local personal briefs are never included in the public build.
 
 Local image filenames must be `img/name.png|jpg|jpeg|gif|webp`, have a matching file signature, resolve inside the brief directory and be at most 8 MiB. `run --input` copies only validated images into staging. Model-generated local image references are not accepted. An invalid local file fails validation even when a remote fallback is present. Remote images require valid HTTP(S) URLs, provenance and independently checked rights. Embedded videos/social posts are ordinary external links, avoiding third-party scripts and iframes.
 

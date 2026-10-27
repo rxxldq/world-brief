@@ -1,4 +1,5 @@
 html{font-size:16px}
+.voice{line-height:1.65}.voice p{margin:10px 0}.funding{border-top:1px dashed var(--line);margin-top:14px;padding-top:10px;font-size:.9rem}.funding h4{margin:0}.funding-status{color:var(--acc)}
 .bar{position:sticky;top:0;z-index:20;background:rgba(15,17,21,.96);border-bottom:1px solid var(--line);display:flex;gap:6px;align-items:center;padding:6px 10px;flex-wrap:wrap}
 .bar button,.bar input{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:4px 9px;font:inherit;font-size:13px;cursor:pointer}
 .bar input{cursor:text;flex:1;min-width:90px;max-width:260px}.bar button:hover{border-color:var(--acc)}

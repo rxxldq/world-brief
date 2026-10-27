@@ -21,6 +21,7 @@ function setup(t) {
 test('config is relative to config location, refuses overwrite and validates options', t => {
   const { root } = setup(t), file = path.join(root, 'config.json');
   initConfig(file, 'zh'); const cfg = loadConfig(file);
+  assert.equal(cfg.schedule.dailyEveryDays, 1);
   assert.equal(cfg.locale, 'zh'); assert.equal(cfg.outRoot, path.join(root, '.world-brief', 'briefs'));
   assert.throws(() => initConfig(file), /EEXIST/);
   for (const modify of [c => c.locale = 'bad', c => c.timezone = 'Invalid/Zone', c => c.ask.enabled = 'false', c => c.provider.timeoutMs = 0, c => c.schedule.dailyAt = '25:90', c => c.ntfy.server = 'http://example.org', c => c.ntfy.enabled = true]) {
@@ -70,7 +71,11 @@ test('run imports daily/weekly, skips due runs and preserves existing output', a
   assert.equal(readJson(path.join(cfg.outRoot, 'latest.json')).length, 1);
   const old = fs.readFileSync(path.join(result.dir, 'brief.json'), 'utf8');
   await assert.rejects(runBrief(cfg, { input }), /already exists/); assert.equal(fs.readFileSync(path.join(result.dir, 'brief.json'), 'utf8'), old);
+  assert.equal((await runBrief(cfg, { kind: 'daily', date: '2025-01-15', due: true })).skipped, true);
+  await assert.rejects(runBrief(cfg, { kind: 'daily', date: '2025-01-16', due: true }), /disabled/);
+  cfg.schedule.dailyEveryDays = 3;
   assert.equal((await runBrief(cfg, { kind: 'daily', date: '2025-01-16', due: true })).skipped, true);
+  await assert.rejects(runBrief(cfg, { kind: 'daily', date: '2025-01-18', due: true }), /disabled/);
   await runBrief(cfg, { input: path.join(projectRoot, 'examples', 'weekly.en.json'), kind: 'weekly' });
   assert.equal(readJson(path.join(cfg.outRoot, 'latest.json')).length, 2);
   await assert.rejects(runBrief(cfg, { input, kind: 'weekly' }), /kind\/date/);

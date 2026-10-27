@@ -6,6 +6,8 @@ Local-first daily news briefs and weekly perspectives, with a searchable HTML re
 
 [Public preview](https://rxxldq.club/world-brief/) · [Source repository](https://github.com/rxxldq/world-brief)
 
+[Using the reader](https://rxxldq.club/world-brief/usage.en.html) · [中文使用说明](https://rxxldq.club/world-brief/usage.zh.html)
+
 The public preview contains fictional examples only. Research generation and direct AI questions run on your own computer. To build the same static preview locally, run `npm run build:demo`; output is `.world-brief/site/`.
 
 Requires **Node.js 22 or later** on Windows, macOS or Linux. No runtime packages, account, API key, external model router or quota telemetry are required for the offline workflow. Live research uses a command provider you explicitly configure.
@@ -59,7 +61,7 @@ node bin/world-brief.mjs schedule --platform linux
 node bin/world-brief.mjs schedule --platform macos
 ```
 
-Each command only exports files into `schedules/`. Review the generated paths before installation. Scheduler clocks use the **OS local timezone**; set `config.timezone` to match if you want date labels to follow the same clock. The daily trigger runs every day with `--due`, which waits `dailyEveryDays` calendar days since the last successful daily brief (default 3). Weekly triggers run Sunday, with a seven-day guard. No backfill occurs. The provider must work unattended under your user account, including its environment and login.
+Each command only exports files into `schedules/`. Review the generated paths before installation. Scheduler clocks use the **OS local timezone**; set `config.timezone` to match if you want date labels to follow the same clock. The daily trigger runs every day with `--due`, which waits `dailyEveryDays` calendar days since the last successful daily brief (default **1**, every day). For an existing config created with an older version, change `schedule.dailyEveryDays` to `1`; installing new source code does not rewrite a private config. Weekly triggers run Sunday, with a seven-day guard. No backfill occurs. The provider must work unattended under your user account, including its environment and login.
 
 - **Windows:** run the generated `install-tasks.ps1` in PowerShell. It creates `WorldBriefOSS-daily` and `WorldBriefOSS-weekly` without overwriting existing tasks. Remove those exact names with `Unregister-ScheduledTask`; existing personal tasks have different names.
 - **Linux:** add the generated `world-brief.cron` lines to your user crontab. Remove those lines to stop it. Cron requires the machine to be running at the trigger time.
@@ -79,5 +81,9 @@ npm run privacy
 CI runs these commands on Node 22/24 and Windows/macOS/Linux. Local verification and its limits are recorded in [the build report](docs/build-report.md). Tests use synthetic providers and local HTTP; they do not generate news, spend model usage, send notifications or install scheduled tasks.
 
 Structure validation **does not verify facts, source reachability, copyright permission, quotation accuracy, publication dates or ideological labels**. Read the cited material before relying on a brief. Remote images are loaded by the browser only when viewed, and can reveal your IP to their host; links and media embeds remain external links, with no third-party widget scripts.
+
+Weekly voices can include a source-grounded position, evidence, reasoning and counterpoint. Public funding disclosures are optional and distinguish a person from an employer or publication. Unknown/not checked does not mean no funding; organization funding is not evidence that a particular statement was paid for. See the usage guide and configuration contract for labels and verification limits.
+
+The homepage introduction is author-owned: `content/introduction.json` starts with empty `en`/`zh` strings. Add the author's text there and rebuild; plain text is escaped and empty introductions are omitted. Usage instructions are maintained separately in `content/usage.json`.
 
 Licensed under MIT. Source and a synthetic reader preview are published on GitHub; no package-registry release or hosted model service is provided. See [release verification](docs/release-report.md) for the checked commit and deployment status.

@@ -6,6 +6,8 @@
 
 [公开预览](https://rxxldq.club/world-brief/) · [GitHub 源码](https://github.com/rxxldq/world-brief)
 
+[在线使用说明](https://rxxldq.club/world-brief/usage.zh.html) · [English guide](https://rxxldq.club/world-brief/usage.en.html)
+
 公开页面只展示虚构示例。真实简报生成和直接 AI 问答在自己的电脑上运行。`npm run build:demo` 可在本机生成相同预览，输出到 `.world-brief/site/`。
 
 需要 Windows、macOS 或 Linux 和 Node.js 22 以上版本。离线流程没有第三方运行依赖，无需模型账号、额度遥测或外部模型路由。
@@ -49,7 +51,7 @@ node bin/world-brief.mjs schedule --platform linux
 node bin/world-brief.mjs schedule --platform macos
 ```
 
-这些命令仅导出调度文件，不安装任务。Windows 导出 PowerShell 注册脚本，Linux 导出 cron 片段，macOS 导出 LaunchAgent plist。请先检查，再自行安装；[英文说明](README.md#scheduling-and-notifications)列有安装与移除方式。触发时间使用操作系统本地时区；建议配置 `timezone` 与系统一致。日报每天触发检查，距上次成功日报满 `dailyEveryDays` 天才运行，默认三天；周评星期日触发，至少间隔七天。关闭机器时不会补齐历史各期。
+这些命令仅导出调度文件，不安装任务。Windows 导出 PowerShell 注册脚本，Linux 导出 cron 片段，macOS 导出 LaunchAgent plist。请先检查，再自行安装；[英文说明](README.md#scheduling-and-notifications)列有安装与移除方式。触发时间使用操作系统本地时区；建议配置 `timezone` 与系统一致。日报默认 `dailyEveryDays: 1`，每天 07:30；旧版配置需自行把原来的 3 改为 1，更新源码不会覆盖私人配置。周评保留星期日 09:00，至少间隔七天。关闭机器时不会补齐历史各期。
 
 ntfy 默认关闭。配置自己的频道和环境变量令牌后，只有 `push 简报目录 --send` 才真正发送。公共频道不应承载私人信息。调度任务默认不发送通知。
 
@@ -67,5 +69,9 @@ npm run privacy
 公开副本不包含邮箱接入、私人频道、个人历史简报、账号额度数据、浏览器资料或机器路径。外部程序仍具有你的用户权限；空工作目录不是操作系统隔离。问答会发送选定新闻、问题及最多六条历史消息给配置的模型，本工具不保存对话正文。
 
 来源真实性、可访问性、引语准确性和媒体立场仍需人工核对。第三方图片需要独立确认使用许可；远程图片在查看页面时会连接图片主机。
+
+周评按原文支持情况展开每人的立场、依据、论证和反方问题，并可附公开资金背景、引用及核查日期。机构资金与个人关系分开显示；“未找到/未核查”不表示没有资助，也不能把机构捐助者写成作者为某条评论收款的证据。
+
+首页介绍由作者填写：`content/introduction.json` 的 `en`、`zh` 初始为空，填写纯文本后重新构建即可显示。空介绍不显示，也不代写宣传语；使用说明单独维护在 `content/usage.json`。
 
 MIT 许可。源码与虚构示例预览发布在 GitHub，未发布到软件包注册中心，也未提供托管模型服务。实际发布验收见[发布报告](docs/release-report.md)。

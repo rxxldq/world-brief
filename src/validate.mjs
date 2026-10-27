@@ -75,7 +75,23 @@ export function validateBrief(b, { dir } = {}) {
       for (const v of array(it, 'voices', at)) {
         if (!object(v)) { errors.push(`${at}.voices must contain objects`); continue; }
         if (!text(v.name) || !CAMPS.includes(v.camp) || !isUrl(v.url) || (!text(v.quote) && !text(v.paraphrase))) errors.push(`${at}.voices require name, camp, source URL and quote or paraphrase`);
-        optionalText(v, ['role', 'outlet', 'bio', 'quote', 'paraphrase', 'date'], `${at}.voices`);
+        optionalText(v, ['role', 'outlet', 'bio', 'quote', 'paraphrase', 'date', 'position', 'evidence', 'reasoning', 'counterpoint'], `${at}.voices`);
+        if (v.funding !== undefined) {
+          const f = v.funding, fat = `${at}.voices.funding`;
+          if (!object(f)) { errors.push(`${fat} must be an object`); continue; }
+          if (!['documented', 'not_found', 'not_checked'].includes(f.status)) errors.push(`${fat}.status invalid`);
+          if (!['person', 'organization'].includes(f.scope)) errors.push(`${fat}.scope must be person|organization`);
+          if (typeof f.summary !== 'string') errors.push(`${fat}.summary must be a string`);
+          if (!isDate(f.checked_at)) errors.push(`${fat}.checked_at must be a real YYYY-MM-DD date`);
+          optionalText(f, ['limitations'], fat);
+          if (!Array.isArray(f.sources)) errors.push(`${fat}.sources must be an array`);
+          const sources = array(f, 'sources', fat);
+          if (f.status === 'documented' && (!text(f.summary) || !sources.length)) errors.push(`${fat} documented funding requires a non-empty summary and at least one citation`);
+          for (const src of sources) {
+            if (!object(src) || !isUrl(src.url)) errors.push(`${fat}.sources must contain HTTP(S) URLs without credentials`);
+            if (object(src)) optionalText(src, ['title', 'publisher'], `${fat}.sources`);
+          }
+        }
       }
     }
   }
