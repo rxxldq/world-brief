@@ -4,7 +4,7 @@
 
 [English](README.md) · [配置说明](docs/configuration.md) · [范围与验收](SPEC.md) · [隐私](docs/privacy.md)
 
-[公开预览](https://rxxldq.github.io/world-brief/) · [GitHub 源码](https://github.com/rxxldq/world-brief)
+[公开预览](https://rxxldq.club/world-brief/) · [GitHub 源码](https://github.com/rxxldq/world-brief)
 
 公开页面只展示虚构示例。真实简报生成和直接 AI 问答在自己的电脑上运行。`npm run build:demo` 可在本机生成相同预览，输出到 `.world-brief/site/`。
 

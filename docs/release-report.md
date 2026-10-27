@@ -5,7 +5,7 @@ Date: 2026-10-28 (Australia/Sydney).
 The user explicitly authorized publication if ready after the bounded public-copy build. The release target is the authenticated user's new public `world-brief` GitHub repository, with a GitHub Pages preview containing only fictional examples.
 
 - Source: [rxxldq/world-brief](https://github.com/rxxldq/world-brief)
-- Preview: [World Brief](https://rxxldq.github.io/world-brief/)
+- Preview: [World Brief](https://rxxldq.club/world-brief/), the account's inherited project Pages domain, with HTTPS enforced for this repository.
 - No personal mailbox, runtime config, historical news, private notification destination or account quota data is published.
 - No hosted model service, unattended local scheduler installation or package-registry release is included.
 
@@ -15,7 +15,11 @@ The original 36-file core and the static-demo delta received independent read-on
 
 The preview builder reads only the four synthetic fixtures. Public reader pages use static mode: question actions copy a prompt instead of invoking an API. The preview workflow tests the candidate and uploads only `.world-brief/site`, excluding personal runtime files.
 
-This record is prepared before publication. Remote CI results, deployment status and exact public content must be verified against the pushed commit before reporting the site as live. The repository's Actions history and Pages deployment records provide the current commit-bound results.
+The initial source commit is `3da1865c124e36b308d10357d47fd81f94d749cd`. Its [Pages build and deployment](https://github.com/rxxldq/world-brief/actions/runs/40538188141) succeeded, and the public HTTPS homepage returned HTTP 200 with the exact fictional-demo notice. Its [validation matrix](https://github.com/rxxldq/world-brief/actions/runs/40538188540) records the six Windows/Linux/macOS and Node 22/24 combinations; the repository's Actions history is authoritative for current job states.
+
+Browser checks on the public domain covered all four English/Chinese daily/weekly pages at 1280 and 390 pixels (eight combinations). Each returned HTTP 200, used static mode and had no horizontal overflow. Search filtering and prompt-copy actions worked; public question chips issued zero API requests and displayed the disconnected-model notice. The first-party archive and article paths remained under the new `/world-brief/` project path.
+
+This report-only follow-up updates the public address and captures the verified deployment. Release tags and the latest commit's Actions/deployment records establish the final published revision; no personal-site source or DNS configuration was modified.
 
 ## Remaining limits
 

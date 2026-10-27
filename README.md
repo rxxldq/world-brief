@@ -4,7 +4,7 @@ Local-first daily news briefs and weekly perspectives, with a searchable HTML re
 
 [中文说明](README.zh-CN.md) · [Configuration](docs/configuration.md) · [Validation and scope](SPEC.md) · [Privacy](docs/privacy.md) · [Provenance](docs/provenance.md)
 
-[Public preview](https://rxxldq.github.io/world-brief/) · [Source repository](https://github.com/rxxldq/world-brief)
+[Public preview](https://rxxldq.club/world-brief/) · [Source repository](https://github.com/rxxldq/world-brief)
 
 The public preview contains fictional examples only. Research generation and direct AI questions run on your own computer. To build the same static preview locally, run `npm run build:demo`; output is `.world-brief/site/`.
 
