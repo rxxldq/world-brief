@@ -1,0 +1,17 @@
+{
+  "name": "world-brief",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first daily news briefs and weekly perspectives, in English or Chinese",
+  "type": "module",
+  "bin": { "world-brief": "bin/world-brief.mjs" },
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.mjs",
+    "privacy": "node scripts/privacy-scan.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "build:demo": "node scripts/build-demo.mjs"
+  },
+  "license": "MIT"
+}

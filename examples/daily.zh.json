@@ -1,0 +1,12 @@
+{
+  "kind": "daily", "locale": "zh", "date": "2025-01-15", "window": "2025-01-12 ~ 2025-01-15",
+  "title": "世界简报 · 虚构演示",
+  "bluf": ["仅作演示：虚构的区域研究会议用于展示页面结构。", "这份文件不是新闻报道，内容未经事实核实。"],
+  "sections": [{"title": "外交", "items": [{
+    "headline": "虚构代表讨论联合研究项目", "summary": "这是一则虚构条目，用于演示展开、搜索与来源标注。",
+    "why_it_matters": "真实简报应使用实际查阅的一手资料。", "confidence": "low",
+    "unverified": "全部为虚构；example.org 是格式占位链接，不是证据。",
+    "sources": [{"title": "占位链接，不是证据", "publisher": "Example", "url": "https://example.org/"}]
+  }]}],
+  "method_note": "手工编写的合成示例，没有检索新闻；结构验证不等于事实核实。"
+}

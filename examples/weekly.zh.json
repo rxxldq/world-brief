@@ -1,0 +1,63 @@
+{
+  "kind": "weekly",
+  "locale": "zh",
+  "date": "2025-01-19",
+  "window": "2025-01-12 ~ 2025-01-19",
+  "title": "多视角周评 · 虚构演示",
+  "bluf": [
+    "仅作演示：以下人物与观点均为虚构，不是新闻报道。"
+  ],
+  "sections": [
+    {
+      "title": "虚构研究合作",
+      "items": [
+        {
+          "headline": "虚构合作项目的不同观点",
+          "summary": "没有实际人物、机构或新闻事件与此示例对应。",
+          "sources": [
+            {
+              "publisher": "Example",
+              "url": "https://example.org/"
+            }
+          ],
+          "voices": [
+            {
+              "name": "虚构评论者 1",
+              "camp": "left",
+              "role": "演示",
+              "paraphrase": "关注公平参与。",
+              "url": "https://example.org/left",
+              "date": "2025-01-18"
+            },
+            {
+              "name": "虚构评论者 2",
+              "camp": "center",
+              "role": "演示",
+              "paraphrase": "关注实际协调。",
+              "url": "https://example.org/center",
+              "date": "2025-01-18"
+            },
+            {
+              "name": "虚构评论者 3",
+              "camp": "right",
+              "role": "演示",
+              "paraphrase": "关注预算问责。",
+              "url": "https://example.org/right",
+              "date": "2025-01-18"
+            },
+            {
+              "name": "虚构评论者 4",
+              "camp": "state-media",
+              "paraphrase": "关注官方项目目标。",
+              "url": "https://example.org/official",
+              "date": "2025-01-18",
+              "role": "演示"
+            }
+          ],
+          "synthesis": "以下观点为虚构。真实简报必须准确归因并披露缺失的观点。"
+        }
+      ]
+    }
+  ],
+  "method_note": "合成示例；占位链接不是事实证据。"
+}

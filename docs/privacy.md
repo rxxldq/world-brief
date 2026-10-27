@@ -1,0 +1,14 @@
+# Privacy and threat boundaries
+
+The public copy is assembled from selected source files, rather than copying a personal working directory. It contains no personal configs, emails, mail state, briefs, logs, quota events, notification topics, browser profiles, credentials, machine-specific policy/routing code or third-party vendor trees.
+
+- `config.json`, `.env*`, generated schedules, `.world-brief/` and dependencies are ignored by Git. Do not use `git add -f` for these files.
+- `npm run privacy` scans public source files for email addresses, workstation paths, key/token patterns, URL credentials, runtime filenames, unreviewed binaries and symlinks. It prints filenames and rule names only, never matching secret values. Runtime/dependency/Git directories are excluded and are not release inputs.
+- A separate local scan compares the candidate to sensitive values from the source config without storing those values in the repository. Results and limits are in the build report.
+- There is no telemetry. The offline examples require no network. Source links and remote images can contact third parties when viewed. No external scripts, fonts, social widgets or map APIs are loaded by generated pages.
+- HTTP is loopback-only. Host and absolute request origin checks reject DNS-rebinding-style requests. AI requests additionally require matching Origin, JSON content type and a custom header. The static allowlist includes only archive, manifest, brief JSON/HTML and validated raster images. Canonical paths reject symlink escapes.
+- AI is opt-in and uses a local executable with your permissions. Empty temporary cwd and prompt restrictions do not create an OS security boundary. Credentials belong in the provider's existing protected mechanisms or environment; do not put secrets in arguments or briefs. The provider may keep its own history or access network services.
+- World Brief stores attempted-question counts and dates, but no questions, answers, command output or credentials. One server per output root is required for the concurrency budget. Local users/processes with access to the server can use it; this is not a multi-user authentication system.
+- ntfy sending requires both config opt-in and explicit `--send`. Use your own authenticated destination for private data. Redirects are rejected so a token is not forwarded to another endpoint.
+
+Pattern scans cannot prove the absence of secrets or detect every personal detail. Review the release file inventory and any new fixture content before publishing. Structural source validation does not establish facts or image licensing. Report security issues privately to the repository owner using the host's private vulnerability reporting feature if available; no personal contact address is bundled.

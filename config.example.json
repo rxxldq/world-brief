@@ -1,0 +1,15 @@
+{
+  "locale": "en",
+  "timezone": "UTC",
+  "outRoot": ".world-brief/briefs",
+  "topics": ["World affairs and conflicts", "Diplomacy", "AI", "Markets"],
+  "provider": {
+    "type": "disabled",
+    "executable": "",
+    "args": [],
+    "timeoutMs": 150000
+  },
+  "ask": { "enabled": false, "port": 17891, "maxPerDay": 40 },
+  "ntfy": { "enabled": false, "server": "https://ntfy.sh", "topic": "", "tokenEnv": "WORLD_BRIEF_NTFY_TOKEN" },
+  "schedule": { "dailyAt": "07:30", "dailyEveryDays": 3, "weeklyAt": "09:00" }
+}

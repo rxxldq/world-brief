@@ -1,0 +1,9 @@
+node_modules/
+.world-brief/
+config.json
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+schedules/

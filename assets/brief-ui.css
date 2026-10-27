@@ -1,0 +1,27 @@
+html{font-size:16px}
+.bar{position:sticky;top:0;z-index:20;background:rgba(15,17,21,.96);border-bottom:1px solid var(--line);display:flex;gap:6px;align-items:center;padding:6px 10px;flex-wrap:wrap}
+.bar button,.bar input{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:4px 9px;font:inherit;font-size:13px;cursor:pointer}
+.bar input{cursor:text;flex:1;min-width:90px;max-width:260px}.bar button:hover{border-color:var(--acc)}
+.chips{display:flex;gap:4px;overflow-x:auto;flex-basis:100%;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips a{white-space:nowrap;text-decoration:none;color:var(--mut);font-size:13px;padding:2px 9px;border-radius:12px;border:1px solid transparent}
+.chips a.on{color:var(--acc);border-color:var(--acc)}
+.layout{display:flex;gap:20px;max-width:1240px;margin:auto}main{flex:1;min-width:0;margin:0;max-width:920px}
+#toc{display:none;position:fixed;z-index:30;top:84px;left:8px;right:8px;bottom:8px;overflow:auto;background:var(--card);border:1px solid var(--acc);border-radius:8px;padding:12px 16px;font-size:14px}
+#toc.show{display:block}#toc h4{margin:12px 0 4px;color:var(--acc);font-size:13px}#toc a{display:flex;gap:6px;align-items:baseline;color:var(--fg);text-decoration:none;padding:3px 0;line-height:1.4}#toc a:hover,#toc a.on{color:var(--acc)}
+@media(min-width:1000px){#toc{display:block;position:sticky;top:96px;align-self:flex-start;flex:0 0 270px;max-height:calc(100vh - 110px);border-color:var(--line);margin:20px 0 0 12px}.tocbtn{display:none}}
+details.item{padding:0}details.item>summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;gap:9px;align-items:flex-start;font-weight:600;font-size:1.02rem;line-height:1.5}
+details.item>summary::-webkit-details-marker{display:none}details.item>summary::after{content:"▸";margin-left:auto;color:var(--mut);transition:transform .15s}
+details.item[open]>summary::after{transform:rotate(90deg)}details.item>.body{padding:0 16px 12px}.hl{flex:1}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;margin-top:.55em;background:#666}.dot.c-high{background:#3fb06b}.dot.c-medium{background:#d1a82e}.dot.c-low{background:#d25353}
+.acts{display:flex;gap:8px;margin-top:8px}.acts button{background:none;color:var(--acc);border:1px solid var(--acc);border-radius:14px;padding:3px 12px;cursor:pointer;font:inherit;font-size:13px}.acts button:hover{background:var(--acc);color:#111}
+.acts .copy-btn{color:var(--mut);border-color:var(--line)}.acts .copy-btn:hover{color:#111}.item.hit>summary{outline:2px solid var(--acc);outline-offset:-2px}
+#ask{position:fixed;z-index:40;left:0;right:0;bottom:0;max-height:78vh;display:flex;flex-direction:column;background:#12151b;border-top:2px solid var(--acc);box-shadow:0 -8px 24px rgba(0,0,0,.5)}
+#ask[hidden]{display:none}.ask-h{display:flex;gap:8px;align-items:center;padding:8px 14px;border-bottom:1px solid var(--line)}.ask-h b{flex:1;font-size:14px;line-height:1.4}
+.ask-h button{background:none;border:0;color:var(--mut);font-size:20px;cursor:pointer}#ask-chips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 14px 0}
+#ask-chips button{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:14px;padding:3px 10px;font:inherit;font-size:13px;cursor:pointer}#ask-chips button:hover{border-color:var(--acc)}
+#ask-log{overflow:auto;padding:8px 14px;flex:1;min-height:60px;font-size:.95rem}.m{margin:8px 0;padding:8px 12px;border-radius:8px;white-space:pre-wrap;word-break:break-word;line-height:1.65}
+.m.q{background:#243044;margin-left:14%}.m.a{background:var(--card);border:1px solid var(--line)}.m.err{border-color:#a44;color:#f0a0a0}.m.wait{color:var(--mut)}
+#ask-f{display:flex;gap:6px;padding:8px 14px 10px;border-top:1px solid var(--line)}#ask-f textarea{flex:1;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:inherit;resize:none}
+#ask-f button{background:var(--acc);color:#111;border:0;border-radius:6px;padding:0 14px;cursor:pointer;font:inherit}#ask-s{padding:0 14px 6px;font-size:12px;color:var(--mut)}
+.toast{position:fixed;left:50%;top:70px;transform:translateX(-50%);background:var(--acc);color:#111;padding:6px 14px;border-radius:16px;font-size:13px;z-index:50}
+body.askopen main{padding-bottom:60vh}header{margin-top:14px}

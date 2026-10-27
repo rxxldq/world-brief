@@ -1,0 +1,21 @@
+{
+  "kind": "daily",
+  "locale": "en",
+  "date": "2025-01-15",
+  "window": "2025-01-12 ~ 2025-01-15",
+  "title": "World Brief · fictional demonstration",
+  "bluf": ["DEMO ONLY: a fictional regional research meeting illustrates the format.", "This file is not reporting and contains no verified news."],
+  "sections": [{
+    "id": "diplomacy", "title": "Diplomacy",
+    "items": [{
+      "headline": "Fictional delegates discuss a shared research programme",
+      "summary": "This invented story demonstrates a collapsible news item, search and source attribution.",
+      "why_it_matters": "Use researched primary sources in a real brief.",
+      "confidence": "low",
+      "unverified": "Entirely fictional. The example.org link is a format placeholder, not evidence.",
+      "sources": [{"title": "Placeholder — not evidence", "publisher": "Example", "url": "https://example.org/"}]
+    }]
+  }],
+  "watchlist": [{"date": "2025-01-16", "item": "Fictional follow-up; demonstration only"}],
+  "method_note": "Hand-authored synthetic fixture; no current news was fetched. Structural validation does not establish truth."
+}

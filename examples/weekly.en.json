@@ -1,0 +1,17 @@
+{
+  "kind": "weekly", "locale": "en", "date": "2025-01-19", "window": "2025-01-12 ~ 2025-01-19",
+  "title": "Weekly Perspectives · fictional demonstration",
+  "bluf": ["DEMO ONLY: fictional viewpoints demonstrate the weekly format."],
+  "sections": [{"title": "Fictional research cooperation", "items": [{
+    "headline": "Illustrative perspectives on a fictional programme", "summary": "No actual person, institution or news event is represented.",
+    "sources": [{"publisher": "Example", "url": "https://example.org/"}],
+    "voices": [
+      {"name": "Fictional commentator A", "camp": "left", "role": "Demonstration", "paraphrase": "Prioritises equitable access.", "url": "https://example.org/left", "date": "2025-01-18"},
+      {"name": "Fictional commentator B", "camp": "center", "role": "Demonstration", "paraphrase": "Prioritises practical coordination.", "url": "https://example.org/center", "date": "2025-01-18"},
+      {"name": "Fictional commentator C", "camp": "right", "role": "Demonstration", "paraphrase": "Prioritises budget accountability.", "url": "https://example.org/right", "date": "2025-01-18"},
+      {"name": "Fictional public broadcaster", "camp": "state-media", "paraphrase": "Prioritises the official programme goals.", "url": "https://example.org/official", "date": "2025-01-18"}
+    ],
+    "synthesis": "These are invented positions. Real coverage must attribute positions accurately and disclose missing perspectives."
+  }]}],
+  "method_note": "Synthetic fixture only. Placeholder links are not evidence."
+}
