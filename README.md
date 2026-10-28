@@ -1,6 +1,6 @@
 # World Brief
 
-There are many AI briefing systems, but this one helps you see things a little more objectively. Its weekly review brings together voices from across the political spectrum—left, right and beyond—regardless of nationality. Where possible, it also identifies their funding sources, helping you better understand whose interests they speak for.
+There are many AI briefing systems, but this one helps you see things a little more objectively. Its weekly review brings together voices from across the political spectrum—left, right and beyond—regardless of nationality. Where possible, it also identifies their funding sources, helping you better understand whose interests they speak for. It also offers automatic translation into English and other languages, helping readers check the original text and compare different perspectives.
 
 [![CI](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml) [![Website](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml)
 

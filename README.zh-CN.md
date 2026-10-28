@@ -1,6 +1,6 @@
 # World Brief · 世界简报
 
-ai简报系统很多，但这个会让你更客观一点，每周周评包含各个立场无论左翼右翼还是什么国籍，顺便尽量标出他们的资金来源，才能更好地知道他们为谁在讲话。
+ai简报系统很多，但这个会让你更客观一点，每周周评包含各个立场无论左翼右翼还是什么国籍，顺便尽量标出他们的资金来源，才能更好地知道他们为谁在讲话。也支持英文及更多语言的自动翻译，方便不同语言的读者对照原文、比较各方观点。
 
 [![CI](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/ci.yml) [![Website](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml/badge.svg)](https://github.com/rxxldq/world-brief/actions/workflows/pages.yml)
 
