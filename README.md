@@ -20,7 +20,7 @@ Requires **Node.js 22 or later** on Windows, macOS or Linux. No runtime packages
 | --- | --- |
 | Briefs | Daily news and weekly perspectives with positions, evidence, reasoning and counterpoints |
 | Public disclosures | Optional cited funding/ownership context, with explicit personal/organization scope and unknown states |
-| Reader | English/Chinese interface, search, contents, expandable stories, source links and copyable AI prompts |
+| Reader | English/Chinese source interface, 39 translation language options, search, contents, expandable stories, source links and copyable AI prompts |
 | Local workflow | Node.js CLI, validated JSON, an optional loopback question service and opt-in notifications |
 | Scheduling | Windows Task Scheduler, Linux cron and macOS launchd exports; daily cadence by default |
 | Verification | Automated tests, privacy checks and CI across three operating systems and Node 22/24 |
@@ -41,7 +41,13 @@ node bin/world-brief.mjs serve
 
 Open the loopback address printed by `serve`. Stop with Ctrl+C. You can also open generated `index.html` files directly; search, contents, expand/collapse and copying prompts work offline. Direct AI answers require `serve` and an enabled provider. Demo news, people and positions are **fictional**; placeholder URLs are not evidence.
 
-For Chinese, use `init --locale zh`, then import `examples/daily.zh.json` and `examples/weekly.zh.json` instead. Set `locale` in your local config for subsequent runs. Article text is supplied in its original language; changing UI language does not translate existing articles.
+For Chinese, use `init --locale zh`, then import `examples/daily.zh.json` and `examples/weekly.zh.json` instead. Set `locale` in your local config for subsequent runs. Article text is supplied in its original language; changing `locale` does not translate existing articles. The reader’s translation panel offers English, the browser language and 39 target-language options.
+
+## Automatic translation
+
+Choose a target language in the reader, archive or public guide and press **Translate**. Supported desktop browsers use the built-in [Translator API](https://developer.chrome.com/docs/ai/translator-api) for translation on the device; the browser may first download a language model. Availability varies by browser, device and language pair. **Restore original** returns the original text; saved JSON, source links, names and identifiers remain unchanged. The source interface and generation locale still use `en` or `zh`; translation choices are independent.
+
+If native translation is unavailable, a public HTTPS page can be opened in [Google’s website translation view](https://support.google.com/translate/answer/2534559?hl=en). This is an explicit external action: Google receives the public page URL and processes that page. It is never offered for local/private addresses, and opening World Brief sends no text to a translation service. Native translation needs a supported secure browser context; directly opened files may not support it. Translation quality varies, especially for quotations, uncertainty and funding relationships: check the original sources.
 
 ## Commands
 

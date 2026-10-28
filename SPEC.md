@@ -35,3 +35,9 @@ Private email integration, account quota readers/external routing, personal prom
 | Independent review | Handoff to the originating manager; not substituted by the writer's own tests |
 
 The public release adds a static preview generated only from the synthetic fixtures; it does not expose the local question service. Current independent review and deployment evidence are recorded in `docs/release-report.md`. Facts, rights to third-party media, live provider behavior, delivered notifications, native scheduler execution and remote CI are reported separately rather than inferred from structural tests.
+
+## Multilingual reader extension
+
+The user subsequently requested automatic translation beyond English and Chinese, including the existing personal reader. Generated brief, archive, public homepage and guide pages provide 39 target-language choices, with English and browser-language shortcuts. A supported browser translates readable text on the device through its native Translator API after an explicit click. Saved source artifacts, URLs, source identities, private quota/account regions and question transcripts are excluded. Source UI/generation locales remain `en` and `zh`.
+
+Acceptance requires original-text restoration, cancellation/error/progress handling, right-to-left direction support, preserved citations and links, and no translation request on page load. A separately disclosed Google website-translation view is enabled only for explicitly public pages with a safe public HTTPS URL; local/private addresses, credentials, query strings and fragments must not be forwarded. Focused tests cover these boundaries and rendered integration; a real supported browser check is required before claiming native translation works. Language-pair/device support and translation accuracy remain browser-dependent.

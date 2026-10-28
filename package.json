@@ -2,7 +2,7 @@
   "name": "world-brief",
   "version": "0.1.0",
   "private": true,
-  "description": "Local-first daily news briefs and weekly perspectives, in English or Chinese",
+  "description": "Local-first daily news briefs and weekly perspectives with a multilingual reader",
   "type": "module",
   "bin": { "world-brief": "bin/world-brief.mjs" },
   "engines": { "node": ">=22" },

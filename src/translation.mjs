@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+
+const asset = name => fs.readFileSync(new URL(`../assets/${name}`, import.meta.url), 'utf8');
+
+// Public page opt-in is deliberate: a loopback reader must never offer a cloud URL.
+export function renderTranslation(locale = 'en', { publicPage = false } = {}) {
+  const zh = locale.startsWith('zh');
+  return `<style>${asset('translate.css')}</style><aside id="wb-translation" lang="${zh ? 'zh-CN' : 'en'}" dir="ltr" translate="no" data-public-page="${publicPage ? 'true' : 'false'}"><details><summary>${zh ? '自动翻译 · Translate' : 'Translate · 自动翻译'}</summary><div class="wb-tr-content"><label for="wb-tr-language">${zh ? '阅读语言' : 'Reading language'}</label><select id="wb-tr-language"></select><div class="wb-tr-actions"><button type="button" id="wb-tr-start">${zh ? '翻译本页' : 'Translate this page'}</button><button type="button" id="wb-tr-english">English</button><button type="button" id="wb-tr-restore" disabled>${zh ? '恢复原文' : 'Restore original'}</button></div><p id="wb-tr-status" role="status" aria-live="polite"></p><p class="wb-tr-note">${zh ? '优先在浏览器本机翻译；首次使用可能需要下载语言模型。译文由机器生成，请对照原文核实引语、事实与资金来源。来源名称、链接和问答内容保留原样。' : 'Translation runs in your browser when supported; language models may download on first use. Machine translations can be inaccurate: check quotations, facts and funding disclosures against the original. Source names, links and Q&A stay unchanged.'}</p><p id="wb-tr-fallback" hidden><a id="wb-tr-google" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">${zh ? '用 Google 网页翻译打开' : 'Open with Google website translation'}</a><span class="wb-tr-note">${zh ? '（可选：点击后 Google 会收到本公开页面的网址并处理页面内容；服务可用性因地区而异。）' : ' (Optional: clicking sends this public page URL to Google, which processes its content. Availability varies by region.)'}</span></p></div></details></aside><script>${asset('translate.js')}</script>`;
+}

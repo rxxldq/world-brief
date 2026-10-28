@@ -24,3 +24,13 @@ This report-only follow-up updates the public address and captures the verified 
 ## Remaining limits
 
 Live provider research/answers, ntfy delivery and native installed-scheduler execution remain untested; they require an end user's configuration. Example source links are deliberate placeholders, not evidence. The owner's explicit export/publication authorization is the basis for releasing the first-party source/styles under MIT; third-party content has not been bundled. Windows symlink creation was unavailable locally; the Linux/macOS CI runs should exercise the symlink containment test.
+
+## Multilingual reader extension
+
+The reader, archive, public homepage and usage guides now offer 39 target-language options, an English shortcut and the browser language. Supported browsers use their native Translator API after a user action, with model-download progress, cancellation, errors and original-text restoration. A separate Google website-translation link is explicitly enabled only for safe public HTTPS pages.
+
+The candidate passed 26 automated tests, syntax checks for 22 JavaScript modules, offline CLI smoke tests, a 48-file privacy scan with zero findings, a source-specific sensitive-value comparison with zero findings, and whitespace checks. Independent read-only review found no material release blocker; targeted review of the final corrections is tracked separately by the release manager.
+
+Real browser checks translated the mixed English/Chinese homepage into French and the Chinese weekly reader into English and Arabic. Original wording restored exactly; source JSON, URLs and identifying source names stayed unchanged. Arabic set right-to-left reading direction, and the tested 390-pixel mobile layout had no horizontal overflow. The personal daily reader also completed native English translation while private quota text stayed unchanged and no Google link was offered.
+
+A simulated unsupported-native-browser check on the public origin confirmed the optional Google fallback, zero automatic translation requests, and removal of query strings and fragments from the forwarded public URL. This simulation does not establish Google service availability in every region. Native support remains conditional on browser, device and language pair; all 39 pairs were not tested. These are candidate verification results, not a claim that the remote deployment has completed.

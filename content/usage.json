@@ -10,6 +10,10 @@
         "text": "Choose English or Chinese examples on the home page, then open a daily or weekly issue from the archive. Search filters the current issue. Contents jumps to a story; expand/collapse and A−/A+ adjust reading. Every story links to its sources. Confidence labels describe the brief's assessment; they are not independent fact checks."
       },
       {
+        "title": "Translate into English or another language",
+        "text": "Use the translation panel to choose English, your browser language or one of 39 language options, then press Translate. Supported desktop browsers translate the page in place with their built-in Translator API; the first use of a language pair may download a browser-managed model. Browser and language-pair support vary. Restore original returns the source wording. Translation affects readable page text, including commentary and funding explanations, while source links, identifiers and the saved brief remain unchanged. Automatic translation can be wrong: check the original before interpreting quotations, uncertainty or financial relationships. If native translation is unavailable, public pages offer a separate Google Translate website view after you choose to open it; Google receives that public URL and processes the public page. Local/private addresses are never offered to Google. Opening the reader does not automatically send its text to a translation service."
+      },
+      {
         "title": "Read each commentator's reasoning",
         "text": "Weekly voices can include a position, evidence, reasoning and counterpoint, as supported by the original commentary. Open the original source to check its context. Political labels are approximate; an employer or outlet is not identical to the author's personal position."
       },
@@ -24,12 +28,22 @@
       {
         "title": "Start a local copy",
         "text": "Install Node.js 22 or later, download or clone the source repository, then run these commands from its folder. All sample stories are fictional. Use daily.zh.json and weekly.zh.json with init --locale zh for Chinese. If your config already exists, edit it instead of running init again.",
-        "commands": ["npm ci --ignore-scripts", "node bin/world-brief.mjs init", "node bin/world-brief.mjs run --input examples/daily.en.json", "node bin/world-brief.mjs run --kind weekly --input examples/weekly.en.json", "node bin/world-brief.mjs serve"]
+        "commands": [
+          "npm ci --ignore-scripts",
+          "node bin/world-brief.mjs init",
+          "node bin/world-brief.mjs run --input examples/daily.en.json",
+          "node bin/world-brief.mjs run --kind weekly --input examples/weekly.en.json",
+          "node bin/world-brief.mjs serve"
+        ]
       },
       {
         "title": "Generate real briefs and schedule them",
         "text": "Set the timezone and topics in local config.json, then configure the command provider according to the repository's configuration guide. Run with --kind daily or --kind weekly without --input. The provider must support research; source syntax checks do not verify facts. Export schedules for windows, linux or macos and review/install the generated files. Daily defaults to every day at 07:30; weekly remains Sunday at 09:00. Scheduler clocks use your OS local timezone. The computer and provider must be available. Exporting a schedule does not install it.",
-        "commands": ["node bin/world-brief.mjs run --kind daily", "node bin/world-brief.mjs run --kind weekly", "node bin/world-brief.mjs schedule --platform windows"]
+        "commands": [
+          "node bin/world-brief.mjs run --kind daily",
+          "node bin/world-brief.mjs run --kind weekly",
+          "node bin/world-brief.mjs schedule --platform windows"
+        ]
       },
       {
         "title": "Keep private data local",
@@ -48,6 +62,10 @@
         "text": "首页选择中文或英文示例，再从存档打开日报、周评。搜索框只筛选当前一期；目录可跳转到条目，展开/折叠控制阅读范围，A−/A+ 调整字号。新闻和评论均可点击原文核对。可信度是简报自身的评估，不代表经过独立事实核查。"
       },
       {
+        "title": "自动翻译成英文及更多语言",
+        "text": "在翻译面板选择英文、浏览器语言或其他目标语言，共提供 39 种语言选项，然后点击“翻译”。支持的桌面浏览器会通过内置 Translator API 原地翻译；首次使用某种语言组合可能需要下载由浏览器管理的语言模型。浏览器及语言组合的支持情况不同，可随时“恢复原文”。正文、评论和资金说明等阅读文字可翻译，来源链接、标识和已保存的简报不变。自动翻译可能有误，涉及引语、未核实信息及资金关系时请核对原文。浏览器不支持时，公开页面提供单独的 Google 网页翻译入口；只有主动打开后，Google 才会收到该公开网址并处理公开页面。本机及私人地址不会提供给 Google。打开阅读器不会自动向翻译服务发送文字。"
+      },
+      {
         "title": "查看每位评论者的完整观点",
         "text": "周评会在原文支持的范围内展开各人的核心立场、依据、论证和反方问题，避免只列一句口号。请结合原文日期和上下文阅读；政治光谱标签是概括，任职机构和发表平台也不能完全代表作者本人。"
       },
@@ -62,12 +80,22 @@
       {
         "title": "在本机试用",
         "text": "安装 Node.js 22 或以上版本，下载或克隆源码，在项目目录运行以下命令。示例内容都是虚构的。init 不覆盖已有配置；如果 config.json 已存在，直接修改即可。serve 运行后，打开终端显示的本机地址，按 Ctrl+C 停止。",
-        "commands": ["npm ci --ignore-scripts", "node bin/world-brief.mjs init --locale zh", "node bin/world-brief.mjs run --input examples/daily.zh.json", "node bin/world-brief.mjs run --kind weekly --input examples/weekly.zh.json", "node bin/world-brief.mjs serve"]
+        "commands": [
+          "npm ci --ignore-scripts",
+          "node bin/world-brief.mjs init --locale zh",
+          "node bin/world-brief.mjs run --input examples/daily.zh.json",
+          "node bin/world-brief.mjs run --kind weekly --input examples/weekly.zh.json",
+          "node bin/world-brief.mjs serve"
+        ]
       },
       {
         "title": "生成真实简报并设置每天运行",
         "text": "在本地 config.json 设置时区、关注话题，并按仓库配置说明接入能检索来源的命令模型。运行 daily 或 weekly 时不带 --input 即调用模型生成。日报默认每天 07:30，周评保留周日 09:00。导出 windows、linux 或 macos 调度文件后，检查并自行安装；导出本身不注册任务。调度时钟跟随操作系统本地时区，建议与配置时区一致。机器和模型必须可用；来源结构检查不等于事实核实。",
-        "commands": ["node bin/world-brief.mjs run --kind daily", "node bin/world-brief.mjs run --kind weekly", "node bin/world-brief.mjs schedule --platform windows"]
+        "commands": [
+          "node bin/world-brief.mjs run --kind daily",
+          "node bin/world-brief.mjs run --kind weekly",
+          "node bin/world-brief.mjs schedule --platform windows"
+        ]
       },
       {
         "title": "保管本地资料与可选通知",

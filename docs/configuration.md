@@ -19,6 +19,10 @@ Copy `config.example.json` through `init`; do not commit your local config. Runt
 
 `serve` binds only to `127.0.0.1`; port `0` requests an ephemeral port. A used port fails, rather than assuming another process is a trusted World Brief server. Use one server per output root so that the in-process concurrency guard and daily budget have one owner. Daily budgets are saved in `.ask-counts.json`; attempted provider calls count even when they fail. Corrupt counters fail closed. The static server never exposes this file.
 
+## Reading translations
+
+No provider configuration or translation API key is required. Generated pages include a user-triggered browser Translator API panel with 39 language choices, plus English and browser-language shortcuts. This does not change `locale`, rewrite a brief or translate the generation request. Browser/device/language-pair availability varies, and the browser may download a language pack. Public HTTPS pages also provide an explicit external Google website-translation view; local/private URLs are excluded. See the [reader guide](../README.md#automatic-translation) and [privacy boundaries](privacy.md).
+
 ## Provider contract
 
 World Brief spawns a single executable without a shell, in a temporary empty working directory. It inherits your environment so you can supply credentials through the provider's supported secret mechanisms. It does not inspect credentials or store provider stderr. Successful stdout is limited to 2 MiB; timeouts, empty output, invalid JSON or a nonzero exit reject the run. The CLI does not retry automatically or substitute another model. All fixture tests use a fake command, never a live subscription.

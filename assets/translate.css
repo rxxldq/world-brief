@@ -1,0 +1,13 @@
+#wb-translation{box-sizing:border-box;max-width:1100px;margin:16px auto;padding:0 18px;color:var(--fg,#1e293b);font:14px/1.55 system-ui,sans-serif;overflow-wrap:anywhere}
+#wb-translation details{border:1px solid var(--line,#64748b);border-radius:8px;background:var(--card,#f8fafc);padding:10px 14px}
+#wb-translation summary{cursor:pointer;font-weight:650;min-height:24px}
+#wb-translation .wb-tr-content{padding-top:10px}
+#wb-translation label{display:inline-block;margin-inline-end:8px}
+#wb-translation select,#wb-translation button{font:inherit;border:1px solid var(--line,#64748b);border-radius:5px;color:inherit;background:var(--bg,#fff);padding:7px 10px;max-width:100%;min-height:38px}
+#wb-translation select{width:min(100%,310px)}
+#wb-translation .wb-tr-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#wb-translation button{cursor:pointer}#wb-translation button:disabled{opacity:.55;cursor:default}
+#wb-translation p{margin:8px 0 0}#wb-translation .wb-tr-note{font-size:.86em;color:var(--mut,#475569)}
+#wb-translation a{color:var(--acc,#1d4ed8);text-decoration:underline}#wb-translation [hidden]{display:none!important}
+#wb-translation :focus-visible{outline:3px solid var(--acc,#1d4ed8);outline-offset:2px}
+@media(max-width:480px){#wb-translation{padding:0 12px}#wb-translation label{display:block;margin-bottom:5px}}
