@@ -15,7 +15,7 @@ Copy `config.example.json` through `init`; do not commit your local config. Runt
 | `ntfy.enabled`, `server`, `topic` | Opt-in HTTPS notification destination; choose your own topic |
 | `ntfy.tokenEnv` | Environment variable holding the token; never put the token in JSON |
 | `schedule.dailyAt`, `weeklyAt` | `HH:MM`, OS local clock |
-| `schedule.dailyEveryDays` | Calendar days since the last successful daily brief; default 1 (daily). Migrate an older private config from 3 to 1 explicitly |
+| `schedule.dailyEveryDays` | Integer calendar days since the last successful daily brief, 1–365; default 1 (every day, skipping the day it was produced). Explicit intervals such as 3 are preserved; existing configs are never rewritten |
 
 `serve` binds only to `127.0.0.1`; port `0` requests an ephemeral port. A used port fails, rather than assuming another process is a trusted World Brief server. Use one server per output root so that the in-process concurrency guard and daily budget have one owner. Daily budgets are saved in `.ask-counts.json`; attempted provider calls count even when they fail. Corrupt counters fail closed. The static server never exposes this file.
 
@@ -54,7 +54,7 @@ An installed Claude CLI can be used as a text-mode command provider by setting:
 }
 ```
 
-This relies on the provider following the output instructions in the JSON request; any surrounding text will be rejected. Check the installed CLI's help for supported tools/options and configure permissions accordingly. No flags that bypass permissions are used. On Windows, use the native `.exe` or invoke an adapter through `node`; `.cmd`/`.bat` shell shims are not executed with `shell: true`. World Brief itself does not implement a Claude or Codex quota client. A live third-party CLI run has not been performed as part of this build.
+This relies on the provider following the output instructions in the JSON request; any surrounding text will be rejected. Check the installed CLI's help for supported tools/options and configure permissions accordingly. No flags that bypass permissions are used. On Windows, use the native `.exe` or invoke an adapter through `node`; `.cmd`/`.bat` shell shims are not executed with `shell: true`. Live third-party CLI behavior requires verification with your installed provider.
 
 ## Brief JSON
 
@@ -75,6 +75,10 @@ Use primary disclosures: annual reports, donor lists, ownership statements, publ
 The public examples remain fictional; their unknown funding fields demonstrate the format and are not real investigations. Local personal briefs are never included in the public build.
 
 Local image filenames must be `img/name.png|jpg|jpeg|gif|webp`, have a matching file signature, resolve inside the brief directory and be at most 8 MiB. `run --input` copies only validated images into staging. Model-generated local image references are not accepted. An invalid local file fails validation even when a remote fallback is present. Remote images require valid HTTP(S) URLs, provenance and independently checked rights. Embedded videos/social posts are ordinary external links, avoiding third-party scripts and iframes.
+
+## Scheduled providers
+
+For scheduled runs, set `provider.executable` to an absolute executable path. cron and launchd start with a minimal PATH, so a bare command name may not resolve. Exported cron and launchd jobs set PATH to `/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin`; an absolute provider path remains the reliable choice for other install locations. Provider authentication and environment variables must also be available to the scheduled job.
 
 ## Failure recovery
 

@@ -7,3 +7,5 @@ config.json
 *.log
 coverage/
 schedules/
+# Local Serena tool state
+.serena/

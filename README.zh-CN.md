@@ -72,9 +72,11 @@ node bin/world-brief.mjs schedule --platform linux
 node bin/world-brief.mjs schedule --platform macos
 ```
 
-这些命令仅导出调度文件，不安装任务。Windows 导出 PowerShell 注册脚本，Linux 导出 cron 片段，macOS 导出 LaunchAgent plist。请先检查，再自行安装；[英文说明](README.md#scheduling-and-notifications)列有安装与移除方式。触发时间使用操作系统本地时区；建议配置 `timezone` 与系统一致。日报默认 `dailyEveryDays: 1`，每天 07:30；旧版配置需自行把原来的 3 改为 1，更新源码不会覆盖私人配置。周评保留星期日 09:00，至少间隔七天。关闭机器时不会补齐历史各期。
+这些命令仅导出调度文件，不安装任务。Windows 导出 PowerShell 注册脚本，Linux 导出 cron 片段，macOS 导出 LaunchAgent plist。请先检查，再自行安装；[英文说明](README.md#scheduling-and-notifications)列有安装与移除方式。触发时间使用操作系统本地时区；建议配置 `timezone` 与系统一致。日报默认 `dailyEveryDays: 1`，每天 07:30 检查是否到期；上次成功生成的同一天会跳过。显式配置的间隔（包括 3 天）继续生效；若现有配置使用其他间隔，需自行设置为 1 才采用每日周期，更新源码不会覆盖私人配置。周评保留星期日 09:00，至少间隔七天。关闭机器时不会补齐历史各期。
 
 ntfy 默认关闭。配置自己的频道和环境变量令牌后，只有 `push 简报目录 --send` 才真正发送。公共频道不应承载私人信息。调度任务默认不发送通知。
+
+定时运行时，请将 `provider.executable` 设置为可执行文件的绝对路径；cron 和 launchd 的 PATH 很小，可能找不到仅以名称指定的命令。
 
 ## 验证与限制
 
@@ -85,7 +87,7 @@ npm run smoke
 npm run privacy
 ```
 
-测试使用虚构数据及本地假模型，不消耗真实模型额度，不发推送，不安装任务。跨平台 CI 已配置；本地实际验证范围见[构建报告](docs/build-report.md)。
+测试使用虚构数据及本地假模型，不消耗真实模型额度，不发推送，不安装任务。跨平台 CI 已配置。
 
 公开副本不包含邮箱接入、私人频道、个人历史简报、账号额度数据、浏览器资料或机器路径。外部程序仍具有你的用户权限；空工作目录不是操作系统隔离。问答会发送选定新闻、问题及最多六条历史消息给配置的模型，本工具不保存对话正文。
 

@@ -9,7 +9,15 @@ import { renderHtml, renderArchive } from './render.mjs';
 
 export function previousBrief(root, kind) {
   if (!fs.existsSync(root)) return undefined;
-  return fs.readdirSync(root).filter(d => new RegExp(`^\\d{4}-\\d{2}-\\d{2}-${kind}$`).test(d) && fs.existsSync(path.join(root, d, 'index.html'))).sort().at(-1)?.slice(0, 10);
+  return fs.readdirSync(root, { withFileTypes: true }).filter(d => {
+    if (!d.isDirectory() || !new RegExp(`^\\d{4}-\\d{2}-\\d{2}-${kind}$`).test(d.name)) return false;
+    const dir = path.join(root, d.name);
+    try {
+      if (!fs.statSync(path.join(dir, 'index.html')).isFile()) return false;
+      const brief = assertBrief(readJson(path.join(dir, 'brief.json')), { dir });
+      return brief.kind === kind && brief.date === d.name.slice(0, 10);
+    } catch { return false; }
+  }).map(d => d.name).sort().at(-1)?.slice(0, 10);
 }
 const dayDiff = (a, b) => (Date.parse(a) - Date.parse(b)) / 86400000;
 
@@ -30,6 +38,7 @@ export async function runBrief(cfg, { kind = 'daily', date, input, due = false }
   try {
     fs.writeFileSync(fd, JSON.stringify({ pid: process.pid, started: new Date().toISOString() }));
     const previous = previousBrief(root, kind);
+    // Daily defaults to one calendar day; explicit intervals and weekly's seven days are preserved.
     const interval = kind === 'daily' ? cfg.schedule.dailyEveryDays : 7;
     if (due && previous && dayDiff(date, previous) < interval) return { skipped: true, reason: 'not due' };
     const name = `${date}-${kind}`, destination = path.join(root, name);

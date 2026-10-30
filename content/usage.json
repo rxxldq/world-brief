@@ -38,7 +38,7 @@
       },
       {
         "title": "Generate real briefs and schedule them",
-        "text": "Set the timezone and topics in local config.json, then configure the command provider according to the repository's configuration guide. Run with --kind daily or --kind weekly without --input. The provider must support research; source syntax checks do not verify facts. Export schedules for windows, linux or macos and review/install the generated files. Daily defaults to every day at 07:30; weekly remains Sunday at 09:00. Scheduler clocks use your OS local timezone. The computer and provider must be available. Exporting a schedule does not install it.",
+        "text": "Set the timezone and topics in local config.json, then configure the command provider according to the repository's configuration guide. Run with --kind daily or --kind weekly without --input. The provider must support research; source syntax checks do not verify facts. Export schedules for windows, linux or macos and review/install the generated files. The daily trigger checks at 07:30 and generates every day by default (explicit cadence settings are preserved); weekly remains Sunday at 09:00. Scheduler clocks use your OS local timezone. The computer and provider must be available. Exporting a schedule does not install it.",
         "commands": [
           "node bin/world-brief.mjs run --kind daily",
           "node bin/world-brief.mjs run --kind weekly",
@@ -89,8 +89,8 @@
         ]
       },
       {
-        "title": "生成真实简报并设置每天运行",
-        "text": "在本地 config.json 设置时区、关注话题，并按仓库配置说明接入能检索来源的命令模型。运行 daily 或 weekly 时不带 --input 即调用模型生成。日报默认每天 07:30，周评保留周日 09:00。导出 windows、linux 或 macos 调度文件后，检查并自行安装；导出本身不注册任务。调度时钟跟随操作系统本地时区，建议与配置时区一致。机器和模型必须可用；来源结构检查不等于事实核实。",
+        "title": "生成真实简报并设置定时运行",
+        "text": "在本地 config.json 设置时区、关注话题，并按仓库配置说明接入能检索来源的命令模型。运行 daily 或 weekly 时不带 --input 即调用模型生成。日报默认每天生成，07:30 检查是否到期；显式配置的间隔继续生效，周评保留周日 09:00。导出 windows、linux 或 macos 调度文件后，检查并自行安装；导出本身不注册任务。调度时钟跟随操作系统本地时区，建议与配置时区一致。机器和模型必须可用；来源结构检查不等于事实核实。",
         "commands": [
           "node bin/world-brief.mjs run --kind daily",
           "node bin/world-brief.mjs run --kind weekly",

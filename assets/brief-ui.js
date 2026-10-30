@@ -4,7 +4,7 @@
   const data = JSON.parse($('#wb-data').textContent), t = data.t;
   const items = $$('details.item'), toc = $('#toc'), ask = $('#ask'), log = $('#ask-log');
   const served = data.mode !== 'static' && (location.protocol === 'http:' || location.protocol === 'https:');
-  const histories = new Map(); let current = -1, busy = false, fontSize = 16;
+  const histories = new Map(); let current = -1, cursor = -1, busy = false, fontSize = 16;
   try { fontSize = Number(localStorage.getItem('wb.fs')) || 16; } catch { /* file mode may disable storage */ }
   function setFont(n) {
     fontSize = Math.max(13, Math.min(21, n)); document.documentElement.style.fontSize = fontSize + 'px';
@@ -27,11 +27,22 @@
     const d = items[i]; if (!d) return;
     if (d.hidden) { search.value = ''; search.oninput(); }
     d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    cursor = i; d.classList.add('hit'); setTimeout(() => d.classList.remove('hit'), 1400);
   }
   $$('#toc a').forEach(a => { a.onclick = e => { e.preventDefault(); go(Number(a.dataset.go)); toc.classList.remove('show'); }; });
+  $$('.chips a').forEach(a => { a.onclick = e => { e.preventDefault(); $('#s-' + a.dataset.sec)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }; });
+  function spy() {
+    let section, story;
+    $$('main section[data-sec]').forEach(s => { if (!s.hidden && s.getBoundingClientRect().top < 120) section = s.dataset.sec; });
+    items.forEach(d => { if (!d.hidden && d.getBoundingClientRect().top < 120) story = d.dataset.idx; });
+    $$('.chips a').forEach(a => a.classList.toggle('on', a.dataset.sec === section));
+    $$('#toc a').forEach(a => a.classList.toggle('on', a.dataset.go === story));
+  }
+  let tick = 0;
+  addEventListener('scroll', () => { if (!tick) tick = setTimeout(() => { tick = 0; spy(); }, 80); }, { passive: true }); spy();
   function promptFor(i, question = t.defaultQuestion) {
     const it = data.items[i];
-    return `${t.promptIntro}\n${data.date}\n${it.h}\n${it.s}\n${it.w}\n${it.u}\n${it.src.map(s => `${s.t} ${s.url}`).join('\n')}\n\n${question}`;
+    return `${t.promptIntro}\n\n${t.dataStart}\n${data.date}\n${it.h}\n${it.s}\n${it.w}\n${it.u}\n${it.src.map(s => `${s.t} ${s.url}`).join('\n')}\n${t.dataEnd}\n\n${question}`;
   }
   async function copy(value) {
     try { await navigator.clipboard.writeText(value); }
@@ -72,6 +83,14 @@
   $('#ask-q').onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(e.target.value); } };
   addEventListener('keydown', e => {
     if (e.key === 'Escape') { closeAsk(); toc.classList.remove('show'); }
-    if (e.key === '/' && !/INPUT|TEXTAREA/.test(e.target.tagName) && !e.ctrlKey && !e.metaKey) { e.preventDefault(); search.focus(); }
+    if (/INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.isContentEditable || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === '/') { e.preventDefault(); search.focus(); }
+    if (e.key === 'j' || e.key === 'k') {
+      const visible = items.filter(d => !d.hidden); if (!visible.length) return;
+      const at = visible.findIndex(d => Number(d.dataset.idx) === cursor);
+      go(Number(visible[Math.max(0, Math.min(visible.length - 1, at + (e.key === 'j' ? 1 : -1)))].dataset.idx));
+    }
+    if (e.key === 'a' && cursor >= 0) openAsk(cursor);
   });
+  items.forEach(d => d.addEventListener('click', e => { if (e.target.closest('summary')) cursor = Number(d.dataset.idx); }));
 })();

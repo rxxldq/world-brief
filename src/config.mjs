@@ -3,17 +3,32 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const projectRoot = fileURLToPath(new URL('../', import.meta.url));
-export const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
+export function readJson(file) {
+  const bytes = fs.readFileSync(file);
+  let text;
+  try { text = new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
+  catch { throw new Error('JSON input must be valid UTF-8'); }
+  return JSON.parse(text.replace(/^\uFEFF/, ''));
+}
+// Keep defaults in the example config, including the one-day daily cadence.
 export const defaults = () => readJson(path.join(projectRoot, 'config.example.json'));
 
 export function loadConfig(file = 'config.json') {
   const configPath = path.resolve(file);
   const raw = readJson(configPath);
+  const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+  if (!object(raw)) throw new Error('config must be an object');
+  for (const key of ['provider', 'ask', 'ntfy', 'schedule']) {
+    if (raw[key] !== undefined && !object(raw[key])) throw new Error(`${key} must be an object`);
+  }
   const base = defaults();
   const cfg = { ...base, ...raw };
   for (const key of ['provider', 'ask', 'ntfy', 'schedule']) cfg[key] = { ...base[key], ...raw[key] };
   if (!['en', 'zh'].includes(cfg.locale)) throw new Error('locale must be en or zh');
-  try { new Intl.DateTimeFormat('en', { timeZone: cfg.timezone }); }
+  try {
+    if (typeof cfg.timezone !== 'string' || !cfg.timezone.trim()) throw new Error();
+    new Intl.DateTimeFormat('en', { timeZone: cfg.timezone });
+  }
   catch { throw new Error('timezone must be an IANA timezone'); }
   if (typeof cfg.outRoot !== 'string' || !cfg.outRoot.trim()) throw new Error('outRoot is required');
   if (!Array.isArray(cfg.topics) || !cfg.topics.length || cfg.topics.some(t => typeof t !== 'string' || !t.trim())) throw new Error('topics must be non-empty strings');
@@ -29,8 +44,11 @@ export function loadConfig(file = 'config.json') {
   if (typeof cfg.ask.enabled !== 'boolean' || typeof cfg.ntfy.enabled !== 'boolean') throw new Error('enabled flags must be boolean');
   if (typeof cfg.ntfy.tokenEnv !== 'string' || !/^[A-Za-z_][A-Za-z0-9_]*$/.test(cfg.ntfy.tokenEnv)) throw new Error('ntfy.tokenEnv must name an environment variable');
   if (typeof cfg.ntfy.topic !== 'string' || (cfg.ntfy.topic && !/^[A-Za-z0-9_-]{1,128}$/.test(cfg.ntfy.topic))) throw new Error('ntfy.topic is invalid');
-  const server = new URL(cfg.ntfy.server);
-  if (server.protocol !== 'https:' || server.username || server.password || server.search || server.hash) throw new Error('ntfy.server must be HTTPS without credentials, query or fragment');
+  try {
+    if (typeof cfg.ntfy.server !== 'string') throw new Error();
+    const server = new URL(cfg.ntfy.server);
+    if (server.protocol !== 'https:' || server.username || server.password || server.search || server.hash) throw new Error();
+  } catch { throw new Error('ntfy.server must be HTTPS without credentials, query or fragment'); }
   if (cfg.ntfy.enabled && !cfg.ntfy.topic) throw new Error('enabled ntfy requires a topic');
   return { ...cfg, configPath, outRoot: path.resolve(path.dirname(configPath), cfg.outRoot) };
 }

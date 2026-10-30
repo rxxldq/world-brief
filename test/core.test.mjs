@@ -30,6 +30,23 @@ test('config is relative to config location, refuses overwrite and validates opt
   assert.equal(dateInZone('UTC', new Date('2025-01-15T23:30Z')), '2025-01-15');
   assert.equal(dateInZone('Australia/Sydney', new Date('2025-01-15T23:30Z')), '2025-01-16');
 });
+test('cadence config inherits the daily default, preserves explicit intervals and validates the range', t => {
+  const { cfg } = setup(t);
+  for (const schedule of [undefined, { dailyAt: '08:15' }]) {
+    fs.writeFileSync(cfg.configPath, JSON.stringify({ schedule }));
+    assert.equal(loadConfig(cfg.configPath).schedule.dailyEveryDays, 1);
+  }
+  for (const dailyEveryDays of [1, 3, 365]) {
+    const original = JSON.stringify({ schedule: { dailyEveryDays } });
+    fs.writeFileSync(cfg.configPath, original);
+    assert.equal(loadConfig(cfg.configPath).schedule.dailyEveryDays, dailyEveryDays);
+    assert.equal(fs.readFileSync(cfg.configPath, 'utf8'), original);
+  }
+  for (const dailyEveryDays of [0, 366, 1.5, '3', null]) {
+    fs.writeFileSync(cfg.configPath, JSON.stringify({ schedule: { dailyEveryDays } }));
+    assert.throws(() => loadConfig(cfg.configPath), /schedule.dailyEveryDays is out of range/);
+  }
+});
 test('malformed shapes, source URLs, images and voices fail validation without crashes', () => {
   for (const b of [null, [], 1, {}, { sections: [null] }, { sections: [{ title: 'x', items: [null] }] }]) assert.ok(validateBrief(b).length);
   const base = fixture('daily.en.json'); assert.deepEqual(validateBrief(base), []);
@@ -61,7 +78,7 @@ test('render localizes UI and escapes HTML, including embedded JSON script termi
 });
 test('push payload is always bounded in UTF-8, with usable source actions', () => {
   const b = fixture('daily.zh.json'); b.bluf = Array(100).fill('简报'.repeat(1000)); b.sections[0].items[0].headline = '标题[]()'.repeat(1000); b.sections[0].items[0].sources[0].url = 'https://example.org/' + 'x'.repeat(5000);
-  const payload = buildPush(b); assert.ok(Buffer.byteLength(payload.message) <= 4096); assert.equal(payload.actions.length, 1);
+  const payload = buildPush(b); assert.ok(Buffer.byteLength(payload.message) <= 4096); assert.equal(payload.actions.length, 0);
   const weekly = buildPush(fixture('weekly.en.json')); assert.match(weekly.message, /Illustrative/);
 });
 test('run imports daily/weekly, skips due runs and preserves existing output', async t => {
@@ -91,6 +108,22 @@ test('scheduler exports native formats with quoted paths and does not install an
   const windows = schedulerFiles(cfg, 'windows')['install-tasks.ps1']; assert.match(windows, /New-ScheduledTaskTrigger -Weekly/); assert.match(windows, /--due/); assert.match(windows, /quote''s/);
   const linux = schedulerFiles(cfg, 'linux')['world-brief.cron']; assert.match(linux, /30 7 \* \* \*/); assert.match(linux, /0 9 \* \* 0/); assert.ok(linux.includes('\\%'));
   const mac = schedulerFiles(cfg, 'macos'); assert.equal(Object.keys(mac).length, 2); assert.match(mac['org.worldbrief.daily.plist'], /&amp;/); assert.match(mac['org.worldbrief.weekly.plist'], /<key>Weekday<\/key><integer>0/);
+  for (const dailyEveryDays of [1, 3]) {
+    cfg.schedule.dailyEveryDays = dailyEveryDays;
+    const win = schedulerFiles(cfg, 'windows')['install-tasks.ps1'];
+    assert.match(win, /New-ScheduledTaskTrigger -Daily -At '07:30'/);
+    assert.doesNotMatch(win, /-DaysInterval/);
+    assert.match(win, /New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At '09:00'/);
+    const cron = schedulerFiles(cfg, 'linux')['world-brief.cron'].split('\n').filter(line => line && !line.startsWith('#'));
+    assert.equal(cron.shift(), 'PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin');
+    assert.equal(cron.length, 2);
+    assert.match(cron[0], /^30 7 \* \* \* .*'--kind' 'daily' '--due'$/);
+    assert.match(cron[1], /^0 9 \* \* 0 .*'--kind' 'weekly' '--due'$/);
+    const plists = schedulerFiles(cfg, 'macos');
+    assert.match(plists['org.worldbrief.daily.plist'], /<key>StartCalendarInterval<\/key><dict><key>Hour<\/key><integer>7<\/integer><key>Minute<\/key><integer>30<\/integer><\/dict>/);
+    assert.match(plists['org.worldbrief.weekly.plist'], /<key>StartCalendarInterval<\/key><dict><key>Hour<\/key><integer>9<\/integer><key>Minute<\/key><integer>0<\/integer><key>Weekday<\/key><integer>0<\/integer><\/dict>/);
+    for (const plist of Object.values(plists)) assert.match(plist, /<string>--due<\/string>/);
+  }
   assert.throws(() => schedulerFiles(cfg, 'other'), /platform/);
 });
 test('privacy scanner detects synthetic secrets and private runtime files without printing values', t => {

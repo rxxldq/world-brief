@@ -54,11 +54,18 @@ test('loopback server serves artifacts only, rejects hostile hosts, traversal an
   });
   assert.equal(hostileHost, 403);
   assert.equal((await fetch(origin + '/', { method: 'PUT' })).status, 405);
-  const file = path.join(root, 'outside.json'); fs.writeFileSync(file, '{}');
-  fs.unlinkSync(path.join(result.dir, 'brief.json'));
-  try { fs.symlinkSync(file, path.join(result.dir, 'brief.json'), 'file'); }
-  catch (e) { if (e.code === 'EPERM') { t.diagnostic('Symlink test unavailable without Windows symlink privilege'); return; } throw e; }
-  assert.equal((await fetch(origin + '/2025-01-15-daily/brief.json')).status, 404);
+  await t.test('symlink outside the artifact root is not served', async subtest => {
+    const file = path.join(root, 'outside.json'); fs.writeFileSync(file, '{}');
+    fs.unlinkSync(path.join(result.dir, 'brief.json'));
+    try { fs.symlinkSync(file, path.join(result.dir, 'brief.json'), 'file'); }
+    catch (e) {
+      if (process.platform === 'win32' && e.code === 'EPERM') {
+        subtest.skip('Windows symlink privilege is unavailable'); return;
+      }
+      throw e;
+    }
+    assert.equal((await fetch(origin + '/2025-01-15-daily/brief.json')).status, 404);
+  });
 });
 
 test('ask API enforces Origin/header, validation, concurrency, durable daily cap and no transcript exposure', async t => {

@@ -12,7 +12,7 @@ There are many AI briefing systems, but this one helps you see things a little m
 
 The public preview contains fictional examples only. Research generation and direct AI questions run on your own computer. To build the same static preview locally, run `npm run build:demo`; output is `.world-brief/site/`.
 
-Requires **Node.js 22 or later** on Windows, macOS or Linux. No runtime packages, account, API key, external model router or quota telemetry are required for the offline workflow. Live research uses a command provider you explicitly configure.
+Requires **Node.js 22 or later** on Windows, macOS or Linux. No runtime packages, account or API key are required for offline use. Live research uses a command provider you explicitly configure.
 
 ## What it does
 
@@ -22,7 +22,7 @@ Requires **Node.js 22 or later** on Windows, macOS or Linux. No runtime packages
 | Public disclosures | Optional cited funding/ownership context, with explicit personal/organization scope and unknown states |
 | Reader | English/Chinese source interface, 39 translation language options, search, contents, expandable stories, source links and copyable AI prompts |
 | Local workflow | Node.js CLI, validated JSON, an optional loopback question service and opt-in notifications |
-| Scheduling | Windows Task Scheduler, Linux cron and macOS launchd exports; daily cadence by default |
+| Scheduling | Windows Task Scheduler, Linux cron and macOS launchd exports; daily briefs every day by default |
 | Verification | Automated tests, privacy checks and CI across three operating systems and Node 22/24 |
 
 The repository contains the reusable tool. The linked website demonstrates its reader with fictional data; it is not a hosted live-news or AI service.
@@ -82,7 +82,9 @@ node bin/world-brief.mjs schedule --platform linux
 node bin/world-brief.mjs schedule --platform macos
 ```
 
-Each command only exports files into `schedules/`. Review the generated paths before installation. Scheduler clocks use the **OS local timezone**; set `config.timezone` to match if you want date labels to follow the same clock. The daily trigger runs every day with `--due`, which waits `dailyEveryDays` calendar days since the last successful daily brief (default **1**, every day). For an existing config created with an older version, change `schedule.dailyEveryDays` to `1`; installing new source code does not rewrite a private config. Weekly triggers run Sunday, with a seven-day guard. No backfill occurs. The provider must work unattended under your user account, including its environment and login.
+For scheduled runs, set `provider.executable` to an absolute executable path; cron and launchd have a minimal PATH and may not find a bare command name.
+
+Each command only exports files into `schedules/`. Review the generated paths before installation. Scheduler clocks use the **OS local timezone**; set `config.timezone` to match if you want date labels to follow the same clock. The daily trigger runs every day with `--due`, which waits `dailyEveryDays` calendar days since the last successful daily brief (default **1**, every day); it skips the day that brief was produced. Explicit intervals, including `3`, remain effective. To apply the daily default to an existing config with another interval, set `schedule.dailyEveryDays` to `1`; installing new source code does not rewrite a private config. Weekly triggers run Sunday, with a seven-day guard. No backfill occurs. The provider must work unattended under your user account, including its environment and login.
 
 - **Windows:** run the generated `install-tasks.ps1` in PowerShell. It creates `WorldBriefOSS-daily` and `WorldBriefOSS-weekly` without overwriting existing tasks. Remove those exact names with `Unregister-ScheduledTask`; existing personal tasks have different names.
 - **Linux:** add the generated `world-brief.cron` lines to your user crontab. Remove those lines to stop it. Cron requires the machine to be running at the trigger time.
@@ -99,7 +101,7 @@ npm run smoke
 npm run privacy
 ```
 
-CI runs these commands on Node 22/24 and Windows/macOS/Linux. Local verification and its limits are recorded in [the build report](docs/build-report.md). Tests use synthetic providers and local HTTP; they do not generate news, spend model usage, send notifications or install scheduled tasks.
+CI runs these commands on Node 22/24 and Windows/macOS/Linux. Tests use synthetic providers and local HTTP; they do not generate news, spend model usage, send notifications or install scheduled tasks.
 
 Structure validation **does not verify facts, source reachability, copyright permission, quotation accuracy, publication dates or ideological labels**. Read the cited material before relying on a brief. Remote images are loaded by the browser only when viewed, and can reveal your IP to their host; links and media embeds remain external links, with no third-party widget scripts.
 
